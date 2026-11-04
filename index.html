@@ -225,6 +225,29 @@
       <p class="bodycopy">The Deshini Family cordially invites you to celebrate the wedding of <em>Bharath</em> and <em>Prasanna</em>.</p>
     </section>
 
+<!-- Live shared greeting feed -->
+<style>
+#wishesFeed { width:min(100%,425px); margin:26px auto 0; display:grid; gap:10px; text-align:left; }
+.wish-card { padding:15px 16px; border-left:2px solid #e6bd69; background:rgba(71,13,35,.55); box-shadow:0 12px 25px rgba(12,0,5,.18); }
+.wish-card b { display:block; color:#ffe1a0; font:600 17px "Cormorant Garamond",serif; }
+.wish-card p { margin:5px 0 0; color:#fff1d2; font:15px/1.55 "DM Sans",sans-serif; white-space:pre-wrap; }
+</style>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+<script>
+(() => { const card=document.querySelector('#events .event-card'); if(!card) return; const add=document.createElement('a'); add.className='gold-button'; add.style.marginTop='18px'; add.style.display='inline-block'; add.target='_blank'; add.rel='noreferrer'; const start='20261115T044100Z', end='20261115T064100Z'; add.href='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('Wedding of Bharath & Prasanna')+'&dates='+start+'/'+end+'&details='+encodeURIComponent('Wedding ceremony of Bharath & Prasanna')+'&location='+encodeURIComponent('Wedding Venue'); add.textContent='Add to calendar'; card.append(add); })();
+</script>
+
+import { addDoc, collection, getFirestore, limit, onSnapshot, orderBy, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+const app=initializeApp({apiKey:"AIzaSyCpfwHw5wi79mG_eL7aJGrPy3XD0Hndw2w",authDomain:"varadha-vijay-live-blessings.firebaseapp.com",projectId:"varadha-vijay-live-blessings",storageBucket:"varadha-vijay-live-blessings.firebasestorage.app",messagingSenderId:"132707073621",appId:"1:132707073621:web:53e12fe71f04c9ee365edc"});
+const wishes=collection(getFirestore(app),"bharathPrasannaBlessings"),form=document.getElementById("wishForm"),status=document.getElementById("wishStatus"),button=form.querySelector("button");
+button.textContent="Share your greeting";
+const feed=document.createElement("div"); feed.id="wishesFeed"; feed.setAttribute("aria-live","polite"); status.after(feed);
+function render(items){feed.replaceChildren();items.forEach(({name,message})=>{const card=document.createElement("article"),title=document.createElement("b"),body=document.createElement("p");card.className="wish-card";title.textContent=name;body.textContent=message;card.append(title,body);feed.append(card)})}
+onSnapshot(query(wishes,orderBy("createdAt","desc"),limit(80)),snapshot=>{render(snapshot.docs.map(doc=>doc.data()));if(!snapshot.empty)status.textContent="Live greetings from family and friends."},()=>{status.textContent="Unable to load live greetings right now. Please refresh and try again."});
+form.addEventListener("submit",async event=>{event.preventDefault();event.stopImmediatePropagation();const name=document.getElementById("wishName").value.trim(),message=document.getElementById("wishMessage").value.trim();if(!name||!message)return;button.disabled=true;status.textContent="Saving your greeting…";try{await addDoc(wishes,{name,message,createdAt:serverTimestamp()});form.reset();status.textContent="Your greeting is now live. Opening WhatsApp for the family…";const text=`Blessings for Bharath & Prasanna\nFrom: ${name}\n${message}`;window.location.href=`https://wa.me/919063213013?text=${encodeURIComponent(text)}`}catch{status.textContent="Unable to save your greeting. Please try again."}finally{button.disabled=false}},true);
+</script>
+
     <section class="keepsake" id="date">
       <div class="scratch-wrap" id="scratch">
         <div class="date-card">
