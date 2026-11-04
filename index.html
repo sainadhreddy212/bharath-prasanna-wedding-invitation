@@ -165,10 +165,11 @@
     .calendar-link { margin-top: 24px; }
 
     /* Thumb-first dock */
-    .dock { position: fixed; z-index: 35; bottom: calc(10px + env(safe-area-inset-bottom)); left: 50%; display: grid; width: min(calc(100% - 24px), 540px); grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 7px; transform: translateX(-50%); border: 1px solid rgba(249, 221, 160, .47); border-radius: 16px; background: rgba(38, 4, 18, .9); box-shadow: 0 14px 32px rgba(12, 0, 6, .44); backdrop-filter: blur(16px); }
+    .dock { position: fixed; z-index: 35; bottom: calc(10px + env(safe-area-inset-bottom)); left: 50%; display: grid; width: min(calc(100% - 24px), 540px); grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; padding: 7px; transform: translateX(-50%); border: 1px solid rgba(249, 221, 160, .47); border-radius: 16px; background: rgba(38, 4, 18, .9); box-shadow: 0 14px 32px rgba(12, 0, 6, .44); backdrop-filter: blur(16px); }
     .dock a { display: flex; min-width: 0; min-height: 50px; flex-direction: column; align-items: center; justify-content: center; gap: 4px; border: 1px solid rgba(249, 221, 160, .36); border-radius: 10px; background: rgba(122, 31, 61, .3); color: #fff1c6; font-size: 9px; font-weight: 600; letter-spacing: .09em; line-height: 1.1; text-align: center; text-decoration: none; text-transform: uppercase; transition: transform .2s ease, background .2s ease, color .2s ease; }
     .dock a:hover, .dock a:focus-visible { transform: translateY(-2px); background: rgba(174, 86, 111, .48); outline: none; }
-    .dock .dock-icon { display: block; color: #f5d892; font: 500 17px / 1 "Cormorant Garamond", serif; letter-spacing: 0; }
+    .dock .dock-icon { display: grid; width: 18px; height: 18px; place-items: center; color: #f5d892; }
+    .dock .dock-icon svg { width: 18px; height: 18px; stroke: currentColor; }
     .dock .dock-emphasis { border-color: #f9e4a8; background: #efd28f; color: #431225; }
     .dock .dock-emphasis .dock-icon { color: #5f2340; }
 
@@ -314,9 +315,10 @@
   <a class="rainbow-credit" href="https://www.instagram.com/the_rainbow_stories_/" target="_blank" rel="noreferrer" aria-label="Follow Rainbow Stories on Instagram"><img src="https://raw.githubusercontent.com/sainadhreddy212/varadha-vijay-wedding-invitation/main/rainbow-stories-logo.png" alt="Rainbow Stories"><span>Designed with love by<strong>Rainbow Stories</strong></span><svg class="instagram-mark" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle></svg></a>
   <audio id="weddingAudio" preload="auto" src="bharath-prasanna-30-to-120.m4a"></audio>
   <nav class="dock" aria-label="Quick actions">
-    <a href="#date" aria-label="Wedding date and time"><span class="dock-icon" aria-hidden="true">15</span><span>Date &amp; Time</span></a>
-    <a href="https://maps.app.goo.gl/VeqDdt8S3kTHkALs5?g_st=aw" target="_blank" rel="noreferrer" aria-label="Open directions in Google Maps"><span class="dock-icon" aria-hidden="true">â†—</span><span>Directions</span></a>
-    <a class="dock-emphasis" href="#celebrate" aria-label="View final celebration message"><span class="dock-icon" aria-hidden="true">âœ¦</span><span>Celebrate</span></a>
+    <a href="#date" aria-label="Wedding date and time"><span class="dock-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg></span><span>Date &amp; Time</span></a>
+    <a id="addToCalendar" href="#date" aria-label="Add wedding to your calendar"><span class="dock-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M7 3v4M17 3v4M3 10h18M12 13v5M9.5 15.5h5"></path></svg></span><span>Add Calendar</span></a>
+    <a href="https://maps.app.goo.gl/VeqDdt8S3kTHkALs5?g_st=aw" target="_blank" rel="noreferrer" aria-label="Open directions in Google Maps"><span class="dock-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M14 5l5 5-5 5"></path><path d="M4 12h14"></path></svg></span><span>Directions</span></a>
+    <a class="dock-emphasis" href="#celebrate" aria-label="View final celebration message"><span class="dock-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 3l1.9 5.8L20 10.7l-4.8 3.5 1.8 5.8-5-3.6-5 3.6 1.8-5.8L4 10.7l6.1-1.9L12 3z"></path></svg></span><span>Celebrate</span></a>
   </nav>
 
   <script>
@@ -337,6 +339,26 @@
     }
     document.getElementById("start").addEventListener("click", () => begin());
     window.addEventListener("pagehide", () => weddingAudio.pause());
+
+    document.getElementById("addToCalendar").addEventListener("click", (event) => {
+      event.preventDefault();
+      const eventText = [
+        "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Rainbow Stories//Wedding Invitation//EN",
+        "BEGIN:VEVENT", "UID:bharath-prasanna-20261115@rainbowstories",
+        "DTSTAMP:20261105T000000Z", "DTSTART:20261115T101100", "DTEND:20261115T131100",
+        "SUMMARY:Bharath & Prasanna Wedding", "LOCATION:Wedding Venue",
+        "DESCRIPTION:Wedding celebration of Bharath and Prasanna.", "END:VEVENT", "END:VCALENDAR"
+      ].join("\\r\\n");
+      const file = new Blob([eventText], { type: "text/calendar;charset=utf-8" });
+      const url = URL.createObjectURL(file);
+      const download = document.createElement("a");
+      download.href = url;
+      download.download = "Bharath-Prasanna-Wedding.ics";
+      document.body.append(download);
+      download.click();
+      download.remove();
+      URL.revokeObjectURL(url);
+    });
 
     const scratch = document.getElementById("scratch");
     const canvas = document.getElementById("scratchCanvas");
