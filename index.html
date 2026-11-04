@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#21070d">
-  <meta name="description" content="The wedding celebration of Bharath and Prasanna â€” 15 November 2026, Wedding Venue.">
+  <meta name="description" content="The wedding celebration of Bharath and Prasanna - 15 November 2026, Wedding Venue.">
   <title>Bharath &amp; Prasanna | A Wedding Celebration</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -73,7 +73,7 @@
     .hero-copy h2 em { display: block; margin: 17px 0 3px; color: var(--gold-light); font: 400 .54em / 1 "Great Vibes", cursive; letter-spacing: 0; }
     .hero-copy > p { margin: 0; font: italic 22px / 1.28 "Cormorant Garamond", serif; }
     .discover { position: absolute; z-index: 3; bottom: calc(35px + var(--safe-bottom)); color: #fff4d7; font-size: 9px; letter-spacing: .19em; text-decoration: none; text-transform: uppercase; }
-    .discover::after { content: "â†“"; display: block; margin-top: 8px; font-size: 23px; }
+    .discover::after { content: "\\2193"; display: block; margin-top: 8px; font-size: 23px; }
     .petal { position: absolute; z-index: 1; width: 10px; height: 15px; border-radius: 65% 35% 65% 35%; background: linear-gradient(135deg, #fff9ec, #e8c470); opacity: .78; filter: drop-shadow(0 3px 5px rgba(39, 3, 13, .6)); animation: falling 9s linear infinite; }
     .petal.p1 { top: -20px; left: 12%; animation-delay: -4s; }
     .petal.p2 { top: -20px; left: 79%; animation-delay: -2s; }
@@ -92,7 +92,7 @@
     .bodycopy { max-width: 455px; margin: auto; color: #f8ead0; font: 500 21px / 1.45 "Cormorant Garamond", serif; text-shadow: 0 2px 15px rgba(20, 0, 7, .48); }
     .hairline { display: flex; align-items: center; justify-content: center; gap: 10px; width: min(165px, 100%); margin: 26px auto; color: #e9c77e; }
     .hairline::before, .hairline::after { content: ""; height: 1px; flex: 1; background: currentColor; }
-    .blessing::after { content: "âœ¦"; display: block; margin: 38px auto 0; color: #e9c77e; font-size: 15px; text-shadow: 0 0 13px rgba(255, 225, 151, .5); }
+    .blessing::after { content: "\\2726"; display: block; margin: 38px auto 0; color: #e9c77e; font-size: 15px; text-shadow: 0 0 13px rgba(255, 225, 151, .5); }
 
     /* Scratch reveal */
     .keepsake { padding: 22px 24px 58px; overflow: hidden; }
@@ -205,7 +205,7 @@
     <section class="hero" id="welcome">
       <div class="frame"></div>
       <div class="shimmer"></div>
-      <div class="hero-topline"><span>15 Â· 11 Â· 2026</span><span class="seal">B P</span><span>Wedding Venue</span></div>
+      <div class="hero-topline"><span>15 &middot; 11 &middot; 2026</span><span class="seal">B P</span><span>Wedding Venue</span></div>
       <i class="petal p1"></i><i class="petal p2"></i><i class="petal p3"></i>
       <div class="hero-copy">
         <div class="overline">Together with the Deshini family</div>
@@ -228,7 +228,7 @@
     <section class="section blessing" id="blessings">
       <div class="kicker">With divine blessings</div>
       <h1 class="heading">With divine blessings of our elders</h1>
-      <div class="hairline">âœ¦</div>
+      <div class="hairline">&#10022;</div>
       <p class="bodycopy">The Deshini Family cordially invites you to celebrate the wedding of <em>Bharath</em> and <em>Prasanna</em>.</p>
     </section>
 
@@ -239,13 +239,13 @@
             <div class="kicker">The wedding ceremony</div>
             <div class="date-number">15</div>
             <h3>November 2026</h3>
-            <p>SUNDAY Â· MUHURTHAM<br>10:11 AM</p>
+            <p>SUNDAY &middot; MUHURTHAM<br>10:11 AM</p>
           </div>
         </div>
         <canvas class="scratch-canvas" id="scratchCanvas" aria-label="Scratch to reveal the wedding date"></canvas>
         <div class="scratch-hint">A golden reveal awaits</div>
         <button class="reveal-now" id="revealDate" type="button">Reveal now</button>
-        <div class="scratch-guide">Scratch here âœ¦</div>
+        <div class="scratch-guide">Scratch here &#10022;</div>
       </div>
       <div class="keepsake-caption"><div class="kicker">A private moment, for you</div><p>Gently scratch the gold foil to reveal the day.</p></div>
     </section>
@@ -274,7 +274,7 @@
     <section class="section details" id="family">
       <div class="kicker">With love and blessings</div>
       <h2 class="heading">A Sacred Union</h2>
-      <div class="hairline">âœ¦</div>
+      <div class="hairline">&#10022;</div>
       <div class="family-letter">
         <article class="family">
           <h3>Hosted with blessings by</h3>
@@ -506,11 +506,11 @@
       if (!name || !message) return;
       const button = form.querySelector("button");
       button.disabled = true;
-      status.textContent = "Saving your greetingâ€¦";
+      status.textContent = "Saving your greeting...";
       try {
         await addDoc(wishes, { name, message, createdAt: serverTimestamp() });
         form.reset();
-        status.textContent = "Your greeting is now live. Opening WhatsApp for the familyâ€¦";
+        status.textContent = "Your greeting is now live. Opening WhatsApp for the family...";
         const text = `Blessings for Bharath & Prasanna\nFrom: ${name}\n${message}`;
         window.location.href = `https://wa.me/919063213013?text=${encodeURIComponent(text)}`;
       } catch {
